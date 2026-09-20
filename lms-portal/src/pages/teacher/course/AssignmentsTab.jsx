@@ -19,50 +19,52 @@ export default function AssignmentsTab() {
       </div>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Topics</th>
-              <th>Due Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paged.map((a) => (
-              <tr key={a.id}>
-                <td style={{ minWidth: 160 }}>
-                  {a.title}
-                  {a.tag && <div className="hackathon-tag">{a.tag}</div>}
-                </td>
-                <td style={{ maxWidth: 260, color: "var(--text-soft)" }}>{a.description}</td>
-                <td style={{ minWidth: 180 }}>
-                  {a.topics.length === 0 ? (
-                    <span style={{ color: "var(--text-faint)" }}>No topics</span>
-                  ) : (
-                    a.topics.map((t, i) => (
-                      <span key={i} className={`tag-pill ${t.startsWith("+") ? "tag-pill--muted" : ""}`}>
-                        {t}
-                      </span>
-                    ))
-                  )}
-                </td>
-                <td style={{ whiteSpace: "nowrap" }}>{a.dueDate}</td>
-                <td>
-                  <div style={{ display: "flex", gap: 4 }}>
-                    <button className="icon-btn">
-                      <Eye size={16} />
-                    </button>
-                    <button className="icon-btn">
-                      <Pencil size={15} />
-                    </button>
-                  </div>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Topics</th>
+                <th>Due Date</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paged.map((a) => (
+                <tr key={a.id}>
+                  <td data-label="Title" style={{ minWidth: 100 }}>
+                    {a.title}
+                    {a.tag && <div className="hackathon-tag">{a.tag}</div>}
+                  </td>
+                  <td data-label="Description" style={{ maxWidth: 190, color: "var(--text-soft)" }}>{a.description}</td>
+                  <td data-label="Topics" style={{ minWidth: 110 }}>
+                    {a.topics.length === 0 ? (
+                      <span style={{ color: "var(--text-faint)" }}>No topics</span>
+                    ) : (
+                      a.topics.map((t, i) => (
+                        <span key={i} className={`tag-pill ${t.startsWith("+") ? "tag-pill--muted" : ""}`}>
+                          {t}
+                        </span>
+                      ))
+                    )}
+                  </td>
+                  <td data-label="Due Date" style={{ whiteSpace: "nowrap" }}>{a.dueDate}</td>
+                  <td data-label="Actions">
+                    <div style={{ display: "flex", gap: 4 }}>
+                      <button className="icon-btn">
+                        <Eye size={16} />
+                      </button>
+                      <button className="icon-btn">
+                        <Pencil size={15} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <Pagination page={page} pageSize={PAGE_SIZE} total={courseAssignments.length} onPageChange={setPage} />
       </div>

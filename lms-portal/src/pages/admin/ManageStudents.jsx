@@ -44,22 +44,22 @@ export default function ManageStudents() {
         </div>
       </div>
 
-      <form className="panel" onSubmit={addStudent} style={{ display: "flex", gap: 10, alignItems: "flex-end", flexWrap: "wrap" }}>
-        <label style={{ fontSize: 13, fontWeight: 600 }}>
-          <span style={{ display: "block", marginBottom: 6 }}>Student name</span>
+      <form className="panel inline-form" onSubmit={addStudent}>
+        <label>
+          <span>Student name</span>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Fatima Noor"
-            style={{ padding: "9px 12px", border: "1px solid var(--border)", borderRadius: 6, fontSize: 14 }}
+            className="form-input"
           />
         </label>
-        <label style={{ fontSize: 13, fontWeight: 600 }}>
-          <span style={{ display: "block", marginBottom: 6 }}>Course</span>
+        <label>
+          <span>Course</span>
           <select
             value={course}
             onChange={(e) => setCourse(e.target.value)}
-            style={{ padding: "9px 12px", border: "1px solid var(--border)", borderRadius: 6, fontSize: 14 }}
+            className="form-input"
           >
             {courses.map((c) => (
               <option key={c.id} value={c.title}>
@@ -68,72 +68,52 @@ export default function ManageStudents() {
             ))}
           </select>
         </label>
-        <button
-          type="submit"
-          style={{
-            background: "var(--blue)",
-            color: "#fff",
-            border: "none",
-            padding: "10px 20px",
-            borderRadius: 6,
-            fontWeight: 600,
-            fontSize: 14,
-          }}
-        >
+        <button type="submit" className="btn-solid">
           + Add Student
         </button>
       </form>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Course</th>
-              <th>Attendance</th>
-              <th>Fee</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {students.map((s) => (
-              <tr key={s.id}>
-                <td>{s.name}</td>
-                <td>{s.course}</td>
-                <td>{s.attendance}%</td>
-                <td>
-                  <span
-                    className={`badge ${
-                      s.feeStatus === "Paid"
-                        ? "badge--green"
-                        : s.feeStatus === "Pending"
-                        ? "badge--gold"
-                        : "badge--red"
-                    }`}
-                  >
-                    {s.feeStatus}
-                  </span>
-                </td>
-                <td>
-                  <button
-                    onClick={() => removeStudent(s.id)}
-                    style={{
-                      background: "none",
-                      border: "1px solid var(--red)",
-                      color: "var(--red)",
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                      fontSize: 12.5,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Remove
-                  </button>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Attendance</th>
+                <th>Fee</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {students.map((s) => (
+                <tr key={s.id}>
+                  <td data-label="Name">{s.name}</td>
+                  <td data-label="Course">{s.course}</td>
+                  <td data-label="Attendance">{s.attendance}%</td>
+                  <td data-label="Fee">
+                    <span
+                      className={`badge ${
+                        s.feeStatus === "Paid"
+                          ? "badge--green"
+                          : s.feeStatus === "Pending"
+                          ? "badge--gold"
+                          : "badge--red"
+                      }`}
+                    >
+                      {s.feeStatus}
+                    </span>
+                  </td>
+                  <td data-label="">
+                    <button onClick={() => removeStudent(s.id)} className="btn-danger-outline">
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

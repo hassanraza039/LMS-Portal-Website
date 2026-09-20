@@ -19,10 +19,7 @@ export default function Payment() {
       </div>
 
       {pending && (
-        <div
-          className="panel"
-          style={{ borderColor: "var(--red)", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-        >
+        <div className="panel panel--alert">
           <div>
             <h3 className="panel__title" style={{ marginBottom: 4 }}>
               {pending.month} fee is due
@@ -31,48 +28,38 @@ export default function Payment() {
               Amount: Rs. {pending.amount.toLocaleString()}
             </p>
           </div>
-          <button
-            style={{
-              background: "var(--red)",
-              color: "#fff",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: 6,
-              fontWeight: 600,
-              fontSize: 14,
-            }}
-          >
-            Pay Now
-          </button>
+          <button className="btn-solid btn-solid--red">Pay Now</button>
         </div>
       )}
 
       <div className="panel">
         <h3 className="panel__title">Payment history</h3>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Amount</th>
-              <th>Paid On</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payments.map((p) => (
-              <tr key={p.id}>
-                <td>{p.month}</td>
-                <td>Rs. {p.amount.toLocaleString()}</td>
-                <td>{p.date}</td>
-                <td>
-                  <span className={`badge ${p.status === "Paid" ? "badge--green" : "badge--gold"}`}>
-                    {p.status}
-                  </span>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Paid On</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {payments.map((p) => (
+                <tr key={p.id}>
+                  <td data-label="Month">{p.month}</td>
+                  <td data-label="Amount">Rs. {p.amount.toLocaleString()}</td>
+                  <td data-label="Paid On">{p.date}</td>
+                  <td data-label="Status">
+                    <span className={`badge ${p.status === "Paid" ? "badge--green" : "badge--gold"}`}>
+                      {p.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

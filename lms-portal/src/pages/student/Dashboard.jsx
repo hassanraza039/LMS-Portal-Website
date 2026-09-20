@@ -22,7 +22,7 @@ export default function StudentDashboard() {
         <strong>{course.title}</strong>
       </div>
 
-      <div className="stat-row" style={{ gridTemplateColumns: "repeat(2, 1fr)" }}>
+      <div className="stat-row stat-row--2">
         <div className="stat-card">
           <div className="stat-card__text">
             <span className="stat-card__label">Attendance</span>
@@ -89,50 +89,55 @@ export default function StudentDashboard() {
 
       <p className="section-title">Fee</p>
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Month</th>
-              <th>Amount</th>
-              <th>Type</th>
-              <th>Due date</th>
-              <th>Voucher ID</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {payments.map((p) => (
-              <tr key={p.id}>
-                <td>{p.month}</td>
-                <td>Rs: {p.amount.toLocaleString()} /-</td>
-                <td>Monthly</td>
-                <td>{p.date !== "-" ? p.date : "—"}</td>
-                <td style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  20260{p.id.replace(/\D/g, "")}773198
-                  <button
-                    style={{
-                      border: "1px solid var(--border)",
-                      background: "var(--surface)",
-                      borderRadius: 6,
-                      padding: 4,
-                      display: "grid",
-                      placeItems: "center",
-                      color: "var(--text-soft)",
-                    }}
-                    aria-label="Copy voucher ID"
-                  >
-                    <Copy size={13} />
-                  </button>
-                </td>
-                <td>
-                  <span className={`badge ${p.status === "Paid" ? "badge--green" : "badge--gold"}`}>
-                    {p.status === "Paid" ? "PAID" : "PENDING"}
-                  </span>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Due date</th>
+                <th>Voucher ID</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {payments.map((p) => (
+                <tr key={p.id}>
+                  <td data-label="Month">{p.month}</td>
+                  <td data-label="Amount">Rs: {p.amount.toLocaleString()} /-</td>
+                  <td data-label="Type">Monthly</td>
+                  <td data-label="Due date">{p.date !== "-" ? p.date : "—"}</td>
+                  <td data-label="Voucher ID">
+                    <span className="cell-flex">
+                      <span>20260{p.id.replace(/\D/g, "")}773198</span>
+                      <button
+                        style={{
+                          border: "1px solid var(--border)",
+                          background: "var(--surface)",
+                          borderRadius: 6,
+                          padding: 4,
+                          display: "grid",
+                          placeItems: "center",
+                          color: "var(--text-soft)",
+                          flexShrink: 0,
+                        }}
+                        aria-label="Copy voucher ID"
+                      >
+                        <Copy size={13} />
+                      </button>
+                    </span>
+                  </td>
+                  <td data-label="Status">
+                    <span className={`badge ${p.status === "Paid" ? "badge--green" : "badge--gold"}`}>
+                      {p.status === "Paid" ? "PAID" : "PENDING"}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

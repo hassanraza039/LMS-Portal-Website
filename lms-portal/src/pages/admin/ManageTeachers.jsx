@@ -34,70 +34,50 @@ export default function ManageTeachers() {
         </div>
       </div>
 
-      <form className="panel" onSubmit={addTeacher} style={{ display: "flex", gap: 10, alignItems: "flex-end", flexWrap: "wrap" }}>
-        <label style={{ fontSize: 13, fontWeight: 600 }}>
-          <span style={{ display: "block", marginBottom: 6 }}>Teacher name</span>
+      <form className="panel inline-form" onSubmit={addTeacher}>
+        <label>
+          <span>Teacher name</span>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Zara Yousuf"
-            style={{ padding: "9px 12px", border: "1px solid var(--border)", borderRadius: 6, fontSize: 14 }}
+            className="form-input"
           />
         </label>
-        <button
-          type="submit"
-          style={{
-            background: "var(--blue)",
-            color: "#fff",
-            border: "none",
-            padding: "10px 20px",
-            borderRadius: 6,
-            fontWeight: 600,
-            fontSize: 14,
-          }}
-        >
+        <button type="submit" className="btn-solid">
           + Add Teacher
         </button>
       </form>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Courses</th>
-              <th>Students</th>
-              <th>Rating</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {teachers.map((t) => (
-              <tr key={t.id}>
-                <td>{t.name}</td>
-                <td>{t.courses.length ? t.courses.join(", ") : "—"}</td>
-                <td>{t.students}</td>
-                <td>{t.rating || "—"}</td>
-                <td>
-                  <button
-                    onClick={() => removeTeacher(t.id)}
-                    style={{
-                      background: "none",
-                      border: "1px solid var(--red)",
-                      color: "var(--red)",
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                      fontSize: 12.5,
-                      fontWeight: 600,
-                    }}
-                  >
-                    Remove
-                  </button>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Courses</th>
+                <th>Students</th>
+                <th>Rating</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {teachers.map((t) => (
+                <tr key={t.id}>
+                  <td data-label="Name">{t.name}</td>
+                  <td data-label="Courses">{t.courses.length ? t.courses.join(", ") : "—"}</td>
+                  <td data-label="Students">{t.students}</td>
+                  <td data-label="Rating">{t.rating || "—"}</td>
+                  <td data-label="">
+                    <button onClick={() => removeTeacher(t.id)} className="btn-danger-outline">
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

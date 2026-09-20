@@ -20,7 +20,7 @@ export default function Attendance() {
         </div>
       </div>
 
-      <div className="stat-row" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+      <div className="stat-row stat-row--3">
         <div className="stat-card">
           <div className="stat-card__text">
             <span className="stat-card__label">Overall attendance</span>
@@ -46,34 +46,36 @@ export default function Attendance() {
 
       <div className="panel">
         <h3 className="panel__title">Daily log</h3>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {attendanceLog.map((d) => (
-              <tr key={d.date}>
-                <td>{d.date}</td>
-                <td>
-                  <span
-                    className={`badge ${
-                      d.status === "Present"
-                        ? "badge--green"
-                        : d.status === "Leave"
-                        ? "badge--gold"
-                        : "badge--red"
-                    }`}
-                  >
-                    {d.status}
-                  </span>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {attendanceLog.map((d) => (
+                <tr key={d.date}>
+                  <td data-label="Date">{d.date}</td>
+                  <td data-label="Status">
+                    <span
+                      className={`badge ${
+                        d.status === "Present"
+                          ? "badge--green"
+                          : d.status === "Leave"
+                          ? "badge--gold"
+                          : "badge--red"
+                      }`}
+                    >
+                      {d.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

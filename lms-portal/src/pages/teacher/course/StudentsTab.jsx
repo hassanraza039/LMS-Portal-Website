@@ -55,54 +55,56 @@ export default function StudentsTab() {
       </div>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Roll Number</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paged.map((s) => (
-              <tr key={s.id}>
-                <td>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <span
-                      style={{
-                        width: 30,
-                        height: 30,
-                        borderRadius: "50%",
-                        background: "var(--blue-soft)",
-                        color: "var(--blue)",
-                        display: "grid",
-                        placeItems: "center",
-                        fontSize: 11.5,
-                        fontWeight: 600,
-                        flexShrink: 0,
-                      }}
-                    >
-                      {initials(s.name)}
-                    </span>
-                    {s.name}
-                  </div>
-                </td>
-                <td>{s.roll}</td>
-                <td>{s.email}</td>
-                <td>
-                  <span className="badge badge--outline">{s.status.toUpperCase()}</span>
-                </td>
-                <td>
-                  <button className="icon-btn">
-                    <Eye size={16} />
-                  </button>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paged.map((s) => (
+                <tr key={s.id}>
+                  <td data-label="Name">
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <span
+                        style={{
+                          width: 30,
+                          height: 30,
+                          borderRadius: "50%",
+                          background: "var(--blue-soft)",
+                          color: "var(--blue)",
+                          display: "grid",
+                          placeItems: "center",
+                          fontSize: 11.5,
+                          fontWeight: 600,
+                          flexShrink: 0,
+                        }}
+                      >
+                        {initials(s.name)}
+                      </span>
+                      {s.name}
+                    </div>
+                  </td>
+                  <td data-label="Roll Number">{s.roll}</td>
+                  <td data-label="Email">{s.email}</td>
+                  <td data-label="Status">
+                    <span className="badge badge--outline">{s.status.toUpperCase()}</span>
+                  </td>
+                  <td data-label="Action">
+                    <button className="icon-btn">
+                      <Eye size={16} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <Pagination page={page} pageSize={PAGE_SIZE} total={filtered.length} onPageChange={setPage} />
       </div>

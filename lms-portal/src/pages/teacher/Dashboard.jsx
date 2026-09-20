@@ -22,7 +22,7 @@ export default function TeacherDashboard() {
         </div>
       </div>
 
-      <div className="stat-row" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+      <div className="stat-row stat-row--3">
         <div className="stat-card">
           <div className="stat-card__text">
             <span className="stat-card__label">Running courses</span>
@@ -49,40 +49,42 @@ export default function TeacherDashboard() {
       </div>
 
       <p className="section-title">My courses</p>
-      <div className="panel" style={{ padding: 0 }}>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th style={{ padding: "14px 20px" }}>Course</th>
-              <th>Students</th>
-              <th>Progress</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {myCourses.map((c) => (
-              <tr
-                key={c.id}
-                onClick={() => navigate(`/teacher/course/${c.id}`)}
-                style={{ cursor: "pointer" }}
-              >
-                <td style={{ padding: "16px 20px", fontWeight: 600 }}>{c.title}</td>
-                <td>{c.students}</td>
-                <td>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div className="progress-track">
-                      <div className="progress-fill" style={{ width: `${c.progress}%` }} />
-                    </div>
-                    <span style={{ fontSize: 13, color: "var(--text-soft)" }}>{c.progress}%</span>
-                  </div>
-                </td>
-                <td style={{ textAlign: "right", paddingRight: 20 }}>
-                  <ChevronRight size={16} color="var(--text-faint)" />
-                </td>
+      <div className="panel panel--flush">
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th style={{ padding: "14px 20px" }}>Course</th>
+                <th>Students</th>
+                <th>Progress</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {myCourses.map((c) => (
+                <tr
+                  key={c.id}
+                  onClick={() => navigate(`/teacher/course/${c.id}`)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <td data-label="Course" style={{ padding: "16px 20px", fontWeight: 600 }}>{c.title}</td>
+                  <td data-label="Students">{c.students}</td>
+                  <td data-label="Progress">
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div className="progress-track">
+                        <div className="progress-fill" style={{ width: `${c.progress}%` }} />
+                      </div>
+                      <span style={{ fontSize: 13, color: "var(--text-soft)" }}>{c.progress}%</span>
+                    </div>
+                  </td>
+                  <td data-label="" style={{ textAlign: "right", paddingRight: 20 }}>
+                    <ChevronRight size={16} color="var(--text-faint)" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

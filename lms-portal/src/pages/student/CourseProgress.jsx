@@ -44,6 +44,8 @@ export default function CourseProgress() {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+                flexWrap: "wrap",
+                gap: 8,
                 padding: "12px 14px",
                 background: "var(--surface-soft)",
                 borderRadius: 8,

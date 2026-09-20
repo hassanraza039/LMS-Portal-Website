@@ -19,44 +19,46 @@ export default function QuizzesTab() {
       </div>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Quiz</th>
-              <th>Course(s)</th>
-              <th>Date</th>
-              <th>Expiry</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paged.map((q) => (
-              <tr key={q.id}>
-                <td style={{ minWidth: 130 }}>{q.title}</td>
-                <td style={{ maxWidth: 260, color: "var(--text-soft)" }}>{q.courses.join(", ")}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{q.date}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{q.expiry}</td>
-                <td>
-                  <span className="badge badge--green">{q.status.toUpperCase()}</span>
-                </td>
-                <td>
-                  <div style={{ display: "flex", gap: 4 }}>
-                    <button className="icon-btn" style={{ color: "var(--green)" }}>
-                      <Eye size={16} />
-                    </button>
-                    <button className="icon-btn">
-                      <Copy size={15} />
-                    </button>
-                    <button className="icon-btn">
-                      <EyeOff size={16} />
-                    </button>
-                  </div>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Quiz</th>
+                <th>Course(s)</th>
+                <th>Date</th>
+                <th>Expiry</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paged.map((q) => (
+                <tr key={q.id}>
+                  <td data-label="Quiz" style={{ minWidth: 130 }}>{q.title}</td>
+                  <td data-label="Course(s)" style={{ maxWidth: 260, color: "var(--text-soft)" }}>{q.courses.join(", ")}</td>
+                  <td data-label="Date" style={{ whiteSpace: "nowrap" }}>{q.date}</td>
+                  <td data-label="Expiry" style={{ whiteSpace: "nowrap" }}>{q.expiry}</td>
+                  <td data-label="Status">
+                    <span className="badge badge--green">{q.status.toUpperCase()}</span>
+                  </td>
+                  <td data-label="Action">
+                    <div style={{ display: "flex", gap: 4 }}>
+                      <button className="icon-btn" style={{ color: "var(--green)" }}>
+                        <Eye size={16} />
+                      </button>
+                      <button className="icon-btn">
+                        <Copy size={15} />
+                      </button>
+                      <button className="icon-btn">
+                        <EyeOff size={16} />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <Pagination page={page} pageSize={PAGE_SIZE} total={courseQuizzes.length} onPageChange={setPage} />
       </div>

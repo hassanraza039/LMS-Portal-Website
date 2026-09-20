@@ -17,6 +17,7 @@
 .pagination__controls {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 4px;
 }
 
@@ -65,4 +66,28 @@
 .pagination__dots {
   padding: 0 4px;
   color: var(--text-faint);
+}
+
+@media (max-width: 640px) {
+  .pagination {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .pagination__controls { justify-content: center; }
+
+  .pagination__nav { padding: 8px 12px; }
+
+  .pagination__page {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 420px) {
+  /* icon-only prev/next on very small phones */
+  .pagination__nav-label { display: none; }
+  .pagination__nav { padding: 8px 10px; }
 }

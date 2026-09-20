@@ -35,8 +35,8 @@ export default function CourseProgressTab() {
       </div>
 
       <div className="panel">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 4 }}>
-          <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 10, marginBottom: 4 }}>
+          <div style={{ minWidth: 0 }}>
             <span style={{ fontSize: 11.5, color: "var(--text-faint)", fontWeight: 600, letterSpacing: "0.03em" }}>
               STUDENT PROGRESS
             </span>
@@ -82,7 +82,7 @@ export default function CourseProgressTab() {
                     textAlign: "left",
                   }}
                 >
-                  <span style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
                     {complete ? (
                       <CheckCircle2 size={18} color="var(--green)" />
                     ) : (
@@ -95,7 +95,7 @@ export default function CourseProgressTab() {
                       </div>
                     </span>
                   </span>
-                  <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
                     <span
                       style={{
                         width: 34,

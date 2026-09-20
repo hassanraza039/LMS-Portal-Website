@@ -17,60 +17,52 @@ export default function Assignments() {
       </div>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Course</th>
-              <th>Due Date</th>
-              <th>Status</th>
-              <th>Grade</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {assignments.map((a) => (
-              <tr key={a.id}>
-                <td>{a.title}</td>
-                <td>{a.course}</td>
-                <td>{a.due}</td>
-                <td>
-                  <span
-                    className={`badge ${
-                      a.status === "Graded"
-                        ? "badge--green"
-                        : a.status === "Pending"
-                        ? "badge--gold"
-                        : "badge--green"
-                    }`}
-                  >
-                    {a.status}
-                  </span>
-                </td>
-                <td>{a.grade || "—"}</td>
-                <td>
-                  {a.status === "Pending" ? (
-                    <button
-                      style={{
-                        background: "var(--blue)",
-                        color: "#fff",
-                        border: "none",
-                        padding: "7px 14px",
-                        borderRadius: 6,
-                        fontSize: 13,
-                        fontWeight: 600,
-                      }}
-                    >
-                      Submit
-                    </button>
-                  ) : (
-                    "—"
-                  )}
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Course</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Grade</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {assignments.map((a) => (
+                <tr key={a.id}>
+                  <td data-label="Title">{a.title}</td>
+                  <td data-label="Course">{a.course}</td>
+                  <td data-label="Due Date">{a.due}</td>
+                  <td data-label="Status">
+                    <span
+                      className={`badge ${
+                        a.status === "Graded"
+                          ? "badge--green"
+                          : a.status === "Pending"
+                          ? "badge--gold"
+                          : "badge--green"
+                      }`}
+                    >
+                      {a.status}
+                    </span>
+                  </td>
+                  <td data-label="Grade">{a.grade || "—"}</td>
+                  <td data-label="">
+                    {a.status === "Pending" ? (
+                      <button className="btn-solid" style={{ padding: "7px 14px", fontSize: 13 }}>
+                        Submit
+                      </button>
+                    ) : (
+                      "—"
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

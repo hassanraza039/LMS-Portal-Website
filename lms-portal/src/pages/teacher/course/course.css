@@ -2,7 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
   margin-bottom: 14px;
+}
+
+.course-topbar .breadcrumb {
+  margin-bottom: 0;
+  min-width: 0;
 }
 
 .feedback-btn {
@@ -34,6 +41,8 @@
   border-bottom: 1px solid var(--border);
   margin-bottom: 22px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 .course-tab {
@@ -46,6 +55,7 @@
   color: var(--text-soft);
   border-bottom: 2px solid transparent;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .course-tab:hover { color: var(--text); }
@@ -72,7 +82,9 @@
   border-radius: 8px;
   padding: 8px 12px;
   background: var(--surface);
-  min-width: 260px;
+  min-width: min(260px, 100%);
+  flex: 1 1 260px;
+  max-width: 420px;
 }
 
 .search-input input {
@@ -89,6 +101,12 @@
   padding: 8px 12px;
   font-size: 13.5px;
   background: var(--surface);
+  color: var(--text);
+  max-width: 100%;
+}
+
+.search-input input {
+  background: transparent;
   color: var(--text);
 }
 
@@ -147,4 +165,64 @@
   padding: 2px 8px;
   border-radius: 5px;
   margin-top: 4px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .course-title {
+    font-size: 20px;
+    margin-bottom: 14px;
+  }
+
+  .course-tabs {
+    gap: 18px;
+    /* let the tab strip touch the screen edges so it feels swipeable */
+    margin-left: -14px;
+    margin-right: -14px;
+    padding: 0 14px;
+    margin-bottom: 18px;
+  }
+
+  .course-tab { padding: 10px 2px 12px; }
+
+  .tab-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .tab-toolbar > span:empty { display: none; }
+
+  .search-input {
+    max-width: none;
+    flex: none;
+    width: 100%;
+  }
+
+  .search-input input { font-size: 16px; }
+
+  .select-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 12px;
+  }
+
+  .tab-toolbar label { width: 100%; }
+
+  .btn-primary {
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+  }
+
+  .feedback-btn { padding: 9px 12px; }
+}
+
+@media (max-width: 380px) {
+  .course-tabs {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding: 0 12px;
+  }
 }

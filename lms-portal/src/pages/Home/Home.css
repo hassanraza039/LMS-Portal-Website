@@ -15,7 +15,7 @@
 }
 
 .hero__title {
-  font-size: 52px;
+  font-size: clamp(32px, 6vw, 52px);
   line-height: 1.08;
   font-weight: 600;
   margin-bottom: 22px;
@@ -61,6 +61,7 @@
   background: #12172B;
   border-radius: 12px;
   padding: 26px;
+  min-width: 0;
 }
 
 .ledger__row {
@@ -157,8 +158,45 @@
   font-size: 14px;
 }
 
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; padding-top: 46px; }
-  .hero__title { font-size: 38px; }
-  .portals__grid { grid-template-columns: 1fr; }
+@media (max-width: 1000px) {
+  .hero { gap: 36px; }
 }
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-top: 46px; padding-bottom: 46px; }
+
+  .portals__grid { grid-template-columns: repeat(2, 1fr); }
+  .portals__grid > .portal-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding-top: 32px; padding-bottom: 36px; gap: 28px; }
+  .hero__sub { font-size: 15.5px; margin-bottom: 24px; }
+
+  .hero__ctas .btn {
+    flex: 1 1 100%;
+    text-align: center;
+    padding: 14px 22px;
+  }
+
+  .hero__panel { padding: 16px; }
+
+  /* course ledger: course + teacher on one line, progress bar underneath */
+  .ledger__row--head { display: none; }
+
+  .ledger__row {
+    grid-template-columns: 1fr auto;
+    gap: 6px 12px;
+    padding: 12px 2px;
+  }
+
+  .ledger__row > span:nth-child(2) { text-align: right; opacity: 0.8; }
+  .ledger__row .ledger__bar-wrap { grid-column: 1 / -1; }
+
+  .portals { padding: 8px 18px 56px; }
+  .portals__title { font-size: 24px; margin: 34px 0 22px; }
+  .portals__grid { grid-template-columns: 1fr; gap: 16px; }
+  .portals__grid > .portal-card:last-child:nth-child(odd) { grid-column: auto; }
+  .portal-card { padding: 22px; }
+}
+

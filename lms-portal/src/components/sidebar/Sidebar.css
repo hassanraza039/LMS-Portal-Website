@@ -1,13 +1,19 @@
+/* ---------- Desktop sidebar ---------- */
 .side {
   width: 230px;
   flex-shrink: 0;
   background: var(--surface);
   border-right: 1px solid var(--border);
-  min-height: 100vh;
+  /* stays in view while the page scrolls */
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   padding: 18px 14px;
-  transition: width 0.18s ease;
 }
 
 .side.is-collapsed {
@@ -64,6 +70,21 @@
 .side__collapse:hover {
   background: var(--surface-soft);
 }
+
+/* close (X) button only exists inside the mobile drawer */
+.side__close {
+  display: none;
+  border: none;
+  background: none;
+  color: var(--text-soft);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.side__close:hover { background: var(--surface-soft); }
 
 .side__list {
   display: flex;
@@ -149,20 +170,137 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  min-width: 0;
 }
 
-@media (max-width: 860px) {
-  .side {
-    width: 100%;
-    min-height: auto;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 12px;
-    overflow-x: auto;
+/* mobile-only pieces are hidden on desktop */
+.mobile-bar,
+.side-overlay {
+  display: none;
+}
+
+/* Collapsed (icon-only) state — desktop only */
+@media (min-width: 901px) {
+  .side.is-animated { transition: width 0.18s ease; }
+
+  .side.is-collapsed .side__brand-text,
+  .side.is-collapsed .side__label,
+  .side.is-collapsed .side__footer-text {
+    display: none;
   }
-  .side.is-collapsed { width: 100%; }
-  .side__top { display: none; }
-  .side__list { flex-direction: row; flex: none; }
-  .side__link { white-space: nowrap; }
-  .side__footer { display: none; }
+
+  .side.is-collapsed .side__top {
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .side.is-collapsed .side__link {
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .side.is-collapsed .side__footer {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0 4px;
+  }
+
+  .side.is-collapsed .side__logout { margin-left: 0; }
+}
+
+/* ---------- Mobile / tablet: off-canvas drawer ---------- */
+@media (max-width: 900px) {
+  .mobile-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    height: calc(var(--mobile-bar-h, 56px) + env(safe-area-inset-top));
+    padding: env(safe-area-inset-top) 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mobile-bar__menu {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    border-radius: 8px;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .mobile-bar__menu:hover { background: var(--surface-soft); }
+
+  .mobile-bar__brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .side-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: rgba(11, 15, 31, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .side-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s ease;
+  }
+
+  .side,
+  .side.is-collapsed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 70;
+    width: min(290px, 86vw);
+    height: 100vh;
+    height: 100dvh;
+    align-self: stretch;
+    padding: calc(14px + env(safe-area-inset-top)) 14px calc(14px + env(safe-area-inset-bottom));
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.25);
+    transform: translateX(-105%);
+    /* not focusable while off-screen */
+    visibility: hidden;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+
+  .side.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.25s ease;
+  }
+
+  .side__collapse { display: none; }
+  .side__close { display: grid; }
+
+  .side__top { margin-bottom: 18px; }
+
+  .side__link {
+    padding: 13px 12px;
+    font-size: 15px;
+  }
+
+  .side__logout {
+    padding: 10px;
+  }
 }

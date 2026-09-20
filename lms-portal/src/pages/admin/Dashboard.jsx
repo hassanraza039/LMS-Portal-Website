@@ -52,33 +52,35 @@ export default function AdminDashboard() {
 
       <div className="panel">
         <h3 className="panel__title">All courses</h3>
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Course</th>
-              <th>Teacher</th>
-              <th>Students</th>
-              <th>Progress</th>
-            </tr>
-          </thead>
-          <tbody>
-            {courses.map((c) => (
-              <tr key={c.id}>
-                <td>{c.title}</td>
-                <td>{c.teacher}</td>
-                <td>{c.students}</td>
-                <td>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <div className="progress-track">
-                      <div className="progress-fill" style={{ width: `${c.progress}%` }} />
-                    </div>
-                    <span style={{ fontSize: 13, color: "var(--text-soft)" }}>{c.progress}%</span>
-                  </div>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Course</th>
+                <th>Teacher</th>
+                <th>Students</th>
+                <th>Progress</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {courses.map((c) => (
+                <tr key={c.id}>
+                  <td data-label="Course">{c.title}</td>
+                  <td data-label="Teacher">{c.teacher}</td>
+                  <td data-label="Students">{c.students}</td>
+                  <td data-label="Progress">
+                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                      <div className="progress-track">
+                        <div className="progress-fill" style={{ width: `${c.progress}%` }} />
+                      </div>
+                      <span style={{ fontSize: 13, color: "var(--text-soft)" }}>{c.progress}%</span>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

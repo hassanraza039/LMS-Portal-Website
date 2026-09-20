@@ -53,7 +53,7 @@ export default function AttendanceTab() {
         </label>
       </div>
 
-      <div className="stat-row" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+      <div className="stat-row">
         <div className="stat-card">
           <div className="stat-card__text">
             <span className="stat-card__label">Total Students</span>
@@ -93,33 +93,35 @@ export default function AttendanceTab() {
       </div>
 
       <div className="panel">
-        <table className="data-table">
-          <thead>
-            <tr>
-              <th>Roll #</th>
-              <th>Full Name</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paged.map((s) => (
-              <tr key={s.id}>
-                <td>{s.roll}</td>
-                <td>{s.name}</td>
-                <td>
-                  <button
-                    className={`badge ${badgeClass(statuses[s.id])}`}
-                    style={{ border: "none", cursor: "pointer" }}
-                    onClick={() => cycleStatus(s.id)}
-                    title="Click to change status"
-                  >
-                    {statuses[s.id].toUpperCase()}
-                  </button>
-                </td>
+        <div className="table-scroll">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>Roll #</th>
+                <th>Full Name</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paged.map((s) => (
+                <tr key={s.id}>
+                  <td data-label="Roll #">{s.roll}</td>
+                  <td data-label="Full Name">{s.name}</td>
+                  <td data-label="Status">
+                    <button
+                      className={`badge ${badgeClass(statuses[s.id])}`}
+                      style={{ border: "none", cursor: "pointer" }}
+                      onClick={() => cycleStatus(s.id)}
+                      title="Click to change status"
+                    >
+                      {statuses[s.id].toUpperCase()}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         <Pagination page={page} pageSize={PAGE_SIZE} total={courseStudents.length} onPageChange={setPage} />
       </div>

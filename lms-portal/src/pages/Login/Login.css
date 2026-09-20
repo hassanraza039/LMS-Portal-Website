@@ -1,5 +1,6 @@
 .login {
   min-height: calc(100vh - 68px);
+  min-height: calc(100dvh - 68px);
   display: grid;
   place-items: center;
   padding: 40px 20px;
@@ -16,6 +17,7 @@
 
 .login__switch {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 22px;
   border-bottom: 1px solid var(--border);
@@ -98,3 +100,20 @@
 }
 
 .login__submit:hover { background: var(--blue-dark); }
+
+@media (max-width: 480px) {
+  .login {
+    min-height: calc(100vh - 60px);
+    min-height: calc(100dvh - 60px);
+    padding: 20px 14px 32px;
+    align-items: start;
+  }
+
+  .login__card { padding: 26px 20px; border-radius: 12px; }
+  .login__card h1 { font-size: 23px; }
+  .login__switch-tab { padding: 10px 4px; margin-right: 10px; }
+
+  /* 16px stops iOS from zooming into the field on focus */
+  .login__field input { font-size: 16px; padding: 12px; }
+  .login__submit { padding: 14px 0; }
+}

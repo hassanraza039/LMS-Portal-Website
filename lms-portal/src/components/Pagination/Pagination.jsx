@@ -22,8 +22,9 @@ export default function Pagination({ page, pageSize, total, onPageChange }) {
           className="pagination__nav"
           disabled={page <= 1}
           onClick={() => onPageChange(page - 1)}
+          aria-label="Previous page"
         >
-          <ChevronLeft size={14} /> Previous
+          <ChevronLeft size={14} /> <span className="pagination__nav-label">Previous</span>
         </button>
         {pages.map((p, i) =>
           p === "..." ? (
@@ -44,8 +45,9 @@ export default function Pagination({ page, pageSize, total, onPageChange }) {
           className="pagination__nav"
           disabled={page >= totalPages}
           onClick={() => onPageChange(page + 1)}
+          aria-label="Next page"
         >
-          Next <ChevronRight size={14} />
+          <span className="pagination__nav-label">Next</span> <ChevronRight size={14} />
         </button>
       </div>
     </div>
